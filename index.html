@@ -6,8 +6,18 @@
   <title>Thone Wa Than | Portfolio</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23A855F7'/%3E%3Cpath d='M30 30h40v10H45v40H35V40H30V30z' fill='white'/%3E%3C/svg%3E">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    :root {
+      --purple-400: #A78BFA;
+      --purple-500: #8B5CF6;
+      --purple-600: #7C3AED;
+      --purple-700: #6D28D9;
+      --purple-900: #4C1D95;
+      --gray-800: #1F2937;
+      --gray-900: #111827;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
     * {
       margin: 0;
@@ -16,66 +26,93 @@
       font-family: 'Inter', sans-serif;
     }
 
-    :root {
-      --purple-400: #A78BFA;
-      --purple-600: #7C3AED;
-      --purple-900: #4C1D95;
-      --gray-800: #1F2937;
-      --gray-900: #111827;
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      background: linear-gradient(to bottom, var(--gray-900), var(--purple-900), var(--gray-900));
+      background: linear-gradient(135deg, var(--gray-900), var(--purple-900), var(--gray-900));
       color: white;
       min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    code {
+      font-family: 'Fira Code', monospace;
     }
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 1rem;
+      padding: 0 1.5rem;
     }
 
+    /* Enhanced Logo */
     .logo {
       position: fixed;
-      top: 1rem;
-      left: 1rem;
+      top: 1.5rem;
+      left: 1.5rem;
       z-index: 50;
-      width: 2.5rem;
-      height: 2.5rem;
+      width: 3rem;
+      height: 3rem;
       background: var(--purple-600);
-      border-radius: 0.5rem;
+      border-radius: 1rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s;
+      box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        0 10px 15px rgba(124, 58, 237, 0.1);
+      transition: var(--transition);
       cursor: pointer;
+      overflow: hidden;
+    }
+
+    .logo::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transform: translateX(-100%);
+      transition: var(--transition);
     }
 
     .logo:hover {
-      transform: rotate(12deg);
+      transform: rotate(12deg) scale(1.1);
+      background: var(--purple-500);
+    }
+
+    .logo:hover::before {
+      transform: translateX(100%);
     }
 
     .logo span {
-      font-size: 1.5rem;
+      font-size: 1.75rem;
       font-weight: bold;
       color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
+    /* Enhanced Background Grid */
     .bg-grid {
       position: fixed;
       inset: 0;
       z-index: 0;
-      opacity: 0.3;
+      opacity: 0.15;
       pointer-events: none;
+      overflow: hidden;
     }
 
     .bg-grid::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(76,29,149,0.2), rgba(0,0,0,0));
+      inset: -50%;
+      background: 
+        radial-gradient(circle at 50% 0%, var(--purple-500) 0%, transparent 50%),
+        radial-gradient(circle at 0% 50%, var(--purple-600) 0%, transparent 50%),
+        radial-gradient(circle at 100% 50%, var(--purple-700) 0%, transparent 50%);
+      animation: bgPulse 10s ease-in-out infinite;
     }
 
     .bg-grid::after {
@@ -87,6 +124,12 @@
         linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px);
       animation: gridMove 20s linear infinite;
+      mask-image: radial-gradient(circle at 50% 50%, black, transparent);
+    }
+
+    @keyframes bgPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
     }
 
     @keyframes gridMove {
@@ -94,28 +137,53 @@
       100% { transform: translateY(-50%); }
     }
 
+    /* Enhanced Mobile Navigation */
     .mobile-nav {
       position: fixed;
-      bottom: 1rem;
+      bottom: 1.5rem;
       left: 50%;
       transform: translateX(-50%);
       z-index: 50;
-      background: rgba(31, 41, 55, 0.9);
-      padding: 0.5rem 1rem;
+      background: rgba(31, 41, 55, 0.95);
+      padding: 0.75rem 1.5rem;
       border-radius: 9999px;
       display: flex;
-      gap: 1rem;
+      gap: 1.5rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        0 10px 15px rgba(0, 0, 0, 0.1);
     }
 
     .mobile-nav a {
       color: var(--purple-400);
-      transition: color 0.3s;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .mobile-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -0.5rem;
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      width: 0.5rem;
+      height: 0.5rem;
+      background: var(--purple-400);
+      border-radius: 50%;
+      transition: var(--transition);
     }
 
     .mobile-nav a:hover {
-      color: #DDD6FE;
+      color: white;
+      transform: translateY(-2px);
     }
 
+    .mobile-nav a:hover::after {
+      transform: translateX(-50%) scale(1);
+    }
+
+    /* Enhanced Hero Section */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -126,59 +194,110 @@
       padding: 2rem;
     }
 
-    .hero-content {
-      text-align: center;
-      max-width: 64rem;
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, transparent 20%, var(--gray-900) 80%);
       z-index: 1;
     }
 
+    .hero-content {
+      text-align: center;
+      max-width: 64rem;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease-out forwards;
+    }
+
     .hero-icon {
-      width: 5rem;
-      height: 5rem;
+      width: 6rem;
+      height: 6rem;
       margin: 0 auto 2rem;
       color: var(--purple-400);
-      animation: pulse 2s infinite;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
 
     .hero-title {
-      font-size: clamp(2rem, 5vw, 4.5rem);
+      font-size: clamp(2.5rem, 6vw, 5rem);
       font-weight: bold;
       margin-bottom: 1.5rem;
       background: linear-gradient(to right, var(--purple-400), #EC4899);
       -webkit-background-clip: text;
       color: transparent;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-stats span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--purple-400);
+      font-size: 1.125rem;
     }
 
     .hero-subtitle {
-      font-size: clamp(1.25rem, 2vw, 1.5rem);
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
       color: #D1D5DB;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      font-weight: 500;
     }
 
+    /* Enhanced Social Links */
     .social-links {
       display: flex;
       justify-content: center;
-      gap: 1rem;
+      gap: 1.5rem;
       margin-bottom: 3rem;
     }
 
     .social-link {
-      width: 3rem;
-      height: 3rem;
+      width: 3.5rem;
+      height: 3.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--gray-800);
-      border-radius: 9999px;
+      background: rgba(31, 41, 55, 0.5);
+      border-radius: 1rem;
       color: var(--purple-400);
-      transition: all 0.3s;
+      transition: var(--transition);
       position: relative;
+      overflow: hidden;
+      text-decoration: none;
+    }
+
+    .social-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transform: translateX(-100%);
+      transition: var(--transition);
     }
 
     .social-link:hover {
-      background: var(--purple-900);
+      background: var(--purple-600);
       color: white;
       transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+    }
+
+    .social-link:hover::before {
+      transform: translateX(100%);
     }
 
     .social-link span {
@@ -189,11 +308,21 @@
       font-size: 0.875rem;
       color: var(--purple-400);
       opacity: 0;
-      transition: opacity 0.3s;
+      transition: var(--transition);
+      white-space: nowrap;
     }
 
     .social-link:hover span {
       opacity: 1;
+      transform: translateX(-50%) translateY(-0.5rem);
+    }
+
+    /* Enhanced Typing Animation */
+    .typing-container {
+      background: rgba(31, 41, 55, 0.3);
+      padding: 1rem 2rem;
+      border-radius: 0.75rem;
+      display: inline-block;
     }
 
     .typing-demo {
@@ -201,7 +330,15 @@
       overflow: hidden;
       border-right: 0.15em solid var(--purple-400);
       white-space: nowrap;
-      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+      margin: 0 auto;
+      animation: 
+        typing 3.5s steps(40, end),
+        blink-caret 0.75s step-end infinite;
+    }
+
+    .typing-demo code {
+      color: var(--purple-400);
+      font-size: 1.125rem;
     }
 
     @keyframes typing {
@@ -214,102 +351,219 @@
       50% { border-color: var(--purple-400) }
     }
 
+    /* Enhanced Sections */
     section {
-      padding: 5rem 0;
+      padding: 6rem 0;
       position: relative;
-      scroll-margin-top: 5rem;
+      scroll-margin-top: 2rem;
     }
 
     .section-title {
-      font-size: 2rem;
+      font-size: 2.5rem;
       font-weight: bold;
       color: white;
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 1rem;
     }
 
     .section-title i {
       color: var(--purple-400);
     }
 
+    /* Enhanced Grid Layout */
     .grid {
       display: grid;
       gap: 2rem;
     }
 
     @media (min-width: 768px) {
-      .grid-2 {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .grid-3 {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .grid-4 {
-        grid-template-columns: repeat(4, 1fr);
-      }
+      .grid-2 { grid-template-columns: repeat(2, 1fr); }
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+      .grid-4 { grid-template-columns: repeat(4, 1fr); }
     }
 
+    /* Enhanced Cards */
     .card {
       background: rgba(31, 41, 55, 0.5);
-      border-radius: 0.75rem;
-      padding: 1.5rem;
-      transition: all 0.3s;
+      border-radius: 1rem;
+      padding: 2rem;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+      transform: translateX(-100%);
+      transition: var(--transition);
     }
 
     .card:hover {
       background: rgba(31, 41, 55, 0.7);
       transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
+    .card:hover::before {
+      transform: translateX(100%);
+    }
+
+    /* Enhanced Skill Tags */
     .skill-tag {
       background: var(--purple-900);
       color: #DDD6FE;
-      padding: 0.25rem 0.5rem;
-      border-radius: 0.25rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
       font-size: 0.875rem;
+      text-align: center;
+      transition: var(--transition);
     }
 
+    .skill-tag:hover {
+      background: var(--purple-600);
+      transform: translateY(-2px);
+    }
+
+    /* Enhanced Project Cards */
     .project-card {
       overflow: hidden;
     }
 
     .project-image {
       width: 100%;
-      height: 12rem;
+      height: 15rem;
       object-fit: cover;
-      transition: transform 0.3s;
+      transition: var(--transition);
+      border-radius: 0.5rem;
     }
 
     .project-card:hover .project-image {
       transform: scale(1.05);
     }
 
+    .project-content {
+      padding: 1.5rem;
+    }
+
+    .project-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: white;
+    }
+
+    .project-description {
+      color: #D1D5DB;
+      margin-bottom: 1rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* Enhanced Contact Section */
+    .contact-section {
+      text-align: center;
+      max-width: 48rem;
+      margin: 0 auto;
+    }
+
+    .contact-text {
+      font-size: 1.25rem;
+      color: #D1D5DB;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1.5rem;
+      background: rgba(31, 41, 55, 0.5);
+      border-radius: 0.75rem;
+      transition: var(--transition);
+      text-decoration: none;
+      color: white;
+    }
+
+    .contact-card:hover {
+      background: var(--purple-600);
+      transform: translateY(-2px);
+    }
+
     .contact-button {
       display: inline-block;
       background: var(--purple-600);
       color: white;
-      padding: 0.75rem 2rem;
-      border-radius: 0.5rem;
+      padding: 1rem 2.5rem;
+      border-radius: 0.75rem;
       text-decoration: none;
-      transition: all 0.3s;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-button::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transform: translateX(-100%);
+      transition: var(--transition);
     }
 
     .contact-button:hover {
-      background: #6D28D9;
-      transform: translateY(-4px);
+      background: var(--purple-700);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
     }
 
+    .contact-button:hover::before {
+      transform: translateX(100%);
+    }
+
+    /* Enhanced Footer */
     footer {
       text-align: center;
-      padding: 2rem;
+      padding: 3rem 0;
       color: #9CA3AF;
+      position: relative;
     }
 
-    @keyframes fadeIn {
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        var(--purple-400),
+        transparent
+      );
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
       from {
         opacity: 0;
         transform: translateY(20px);
@@ -321,10 +575,34 @@
     }
 
     .fade-in {
-      animation: fadeIn 0.6s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: var(--transition);
     }
 
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive Design */
     @media (max-width: 768px) {
+      .hero-stats {
+        gap: 1rem;
+      }
+
+      .hero-stats span {
+        font-size: 1rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
       .mobile-nav {
         display: flex;
       }
@@ -343,11 +621,11 @@
   </div>
 
   <nav class="mobile-nav">
-    <a href="#about"><i data-lucide="brain"></i></a>
-    <a href="#expertise"><i data-lucide="code"></i></a>
-    <a href="#skills"><i data-lucide="terminal"></i></a>
-    <a href="#projects"><i data-lucide="globe"></i></a>
-    <a href="#contact"><i data-lucide="mail"></i></a>
+    <a href="#about" aria-label="About"><i data-lucide="brain"></i></a>
+    <a href="#expertise" aria-label="Expertise"><i data-lucide="code"></i></a>
+    <a href="#skills" aria-label="Skills"><i data-lucide="terminal"></i></a>
+    <a href="#projects" aria-label="Projects"><i data-lucide="globe"></i></a>
+    <a href="#contact" aria-label="Contact"><i data-lucide="mail"></i></a>
   </nav>
 
   <div class="bg-grid"></div>
@@ -363,11 +641,11 @@
       </div>
       <p class="hero-subtitle">AI Engineer & Full Stack Developer</p>
       <div class="social-links">
-        <a href="https://github.com/thonewathan" class="social-link" target="_blank">
+        <a href="https://github.com/thonewathan" class="social-link" target="_blank" rel="noopener noreferrer">
           <i data-lucide="github"></i>
           <span>GitHub</span>
         </a>
-        <a href="https://twitter.com/thonewathan" class="social-link" target="_blank">
+        <a href="https://twitter.com/thonewathan" class="social-link" target="_blank" rel="noopener noreferrer">
           <i data-lucide="twitter"></i>
           <span>Twitter</span>
         </a>
@@ -380,14 +658,16 @@
           <span>Phone</span>
         </a>
       </div>
-      <div class="typing-demo">
-        <code>const passion = ['AI', 'Machine Learning', 'Web Development'];</code>
+      <div class="typing-container">
+        <div class="typing-demo">
+          <code>const passion = ['AI', 'Machine Learning', 'Web Development'];</code>
+        </div>
       </div>
     </div>
   </header>
 
   <main class="container">
-    <section id="about">
+    <section id="about" class="fade-in">
       <h2 class="section-title">
         <i data-lucide="code"></i>
         About Me
@@ -397,27 +677,27 @@
           <p>
             As a 20-year-old prodigy in the tech world, I've achieved 90% proficiency across multiple programming languages and web technologies. My expertise spans from front-end development to complex AI systems, making me a versatile full-stack developer with a passion for innovation.
           </p>
-          <p style="margin-top: 1rem">
+          <p style="margin-top: 1.5rem">
             My journey in tech has been marked by rapid learning and practical application, working on diverse projects from responsive web applications to machine learning models. I'm particularly focused on creating accessible and efficient solutions that bridge the gap between cutting-edge technology and real-world needs.
           </p>
         </div>
         <div class="grid grid-2" style="gap: 1rem">
           <div class="card">
-            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem">
               <i data-lucide="mail"></i>
               <span>thonewathan.personal@gmail.com</span>
             </div>
-            <div style="display: flex; align-items: center; gap: 0.5rem">
+            <div style="display: flex; align-items: center; gap: 0.75rem">
               <i data-lucide="phone"></i>
               <span>09685752511</span>
             </div>
           </div>
           <div class="card">
-            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem">
+            <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem">
               <i data-lucide="github"></i>
               <span>@thonewathan</span>
             </div>
-            <div style="display: flex; align-items: center; gap: 0.5rem">
+            <div style="display: flex; align-items: center; gap: 0.75rem">
               <i data-lucide="twitter"></i>
               <span>@thonewathan</span>
             </div>
@@ -426,151 +706,49 @@
       </div>
     </section>
 
-    <section id="expertise">
+    <section id="expertise" class="fade-in">
       <h2 class="section-title">
         <i data-lucide="brain"></i>
         Areas of Expertise
       </h2>
       <div class="grid grid-2">
         <div class="card">
-          <i data-lucide="brain" style="color: var(--purple-400); width: 2.5rem; height: 2.5rem; margin-bottom: 1rem"></i>
-          <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem">Machine Learning</h3>
+          <i data-lucide="brain" style="color: var(--purple-400); width: 3rem; height: 3rem; margin-bottom: 1.5rem"></i>
+          <h3 class="project-title">Machine Learning</h3>
           <p>Developing and deploying ML models for real-world applications, specializing in NLP and computer vision.</p>
         </div>
         <div class="card">
-          <i data-lucide="code" style="color: var(--purple-400); width: 2.5rem; height: 2.5rem; margin-bottom: 1rem"></i>
-          <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem">Full Stack Development</h3>
+          <i data-lucide="code" style="color: var(--purple-400); width: 3rem; height: 3rem; margin-bottom: 1.5rem"></i>
+          <h3 class="project-title">Full Stack Development</h3>
           <p>Building scalable web applications using modern frameworks and cloud technologies.</p>
         </div>
         <div class="card">
-          <i data-lucide="cloud" style="color: var(--purple-400); width: 2.5rem; height: 2.5rem; margin-bottom: 1rem"></i>
-          <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem">Cloud Architecture</h3>
+          <i data-lucide="cloud" style="color: var(--purple-400); width: 3rem; height: 3rem; margin-bottom: 1.5rem"></i>
+          <h3 class="project-title">Cloud Architecture</h3>
           <p>Designing and implementing cloud-native solutions with a focus on scalability and performance.</p>
         </div>
         <div class="card">
-          <i data-lucide="database" style="color: var(--purple-400); width: 2.5rem; height: 2.5rem; margin-bottom: 1rem"></i>
-          <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem">Data Engineering</h3>
+          <i data-lucide="database" style="color: var(--purple-400); width: 3rem; height: 3rem; margin-bottom: 1.5rem"></i>
+          <h3 class="project-title">Data Engineering</h3>
           <p>Creating robust data pipelines and infrastructure for AI/ML workflows.</p>
         </div>
       </div>
     </section>
 
-    <section id="skills">
+    <section id="skills" class="fade-in">
       <h2 class="section-title">
         <i data-lucide="terminal"></i>
         Technical Skills
       </h2>
       <div class="grid grid-4">
-        <div class="card skill-tag">Python</div>
-        <div class="card skill-tag">TensorFlow</div>
-        <div class="card skill-tag">PyTorch</div>
-        <div class="card skill-tag">React</div>
-        <div class="card skill-tag">Node.js</div>
-        <div class="card skill-tag">TypeScript</div>
-        <div class="card skill-tag">AWS</div>
-        <div class="card skill-tag">Docker</div>
-        <div class="card skill-tag">Kubernetes</div>
-        <div class="card skill-tag">GraphQL</div>
-        <div class="card skill-tag">PostgreSQL</div>
-        <div class="card skill-tag">Redis</div>
-        <div class="card skill-tag">FastAPI</div>
-        <div class="card skill-tag">scikit-learn</div>
-        <div class="card skill-tag">OpenAI API</div>
-        <div class="card skill-tag">Transformers</div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <h2 class="section-title">
-        <i data-lucide="globe"></i>
-        Featured Projects
-      </h2>
-      <div class="grid grid-2">
-        <div class="card project-card">
-          <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80" alt="AI Content Generator" class="project-image">
-          <div style="padding: 1.5rem">
-            <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem">AI-Powered Content Generator</h3>
-            <p style="margin-bottom: 1rem">An intelligent system that generates high-quality content using advanced language models.</p>
-            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem">
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">OpenAI API</span>
-              <span class="skill-tag">React</span>
-              <span class="skill-tag">FastAPI</span>
-            </div>
-          </div>
-        </div>
-        <div class="card project-card">
-          <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80" alt="Computer Vision Analytics" class="project-image">
-          <div style="padding: 1.5rem">
-            <h3 style="font-size: 1.25rem; margin-bottom: 0.5rem">Computer Vision Analytics</h3>
-            <p style="margin-bottom: 1rem">Real-time object detection and analysis system for security applications.</p>
-            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem">
-              <span class="skill-tag">PyTorch</span>
-              <span class="skill-tag">OpenCV</span>
-              <span class="skill-tag">TensorFlow</span>
-              <span class="skill-tag">React</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <h2 class="section-title" style="text-align: center">
-        <i data-lucide="mail"></i>
-        Let's Connect
-      </h2>
-      <div style="text-align: center; max-width: 48rem; margin: 0 auto">
-        <p style="font-size: 1.125rem; margin-bottom: 2rem">
-          Interested in AI solutions or collaboration opportunities?
-          Let's discuss how we can work together to bring your ideas to life.
-        </p>
-        <div class="grid grid-2" style="max-width: 32rem; margin: 0 auto 2rem">
-          <a href="mailto:thonewathan.personal@gmail.com" class="card" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none; color: inherit">
-            <i data-lucide="mail"></i>
-            <span>thonewathan.personal@gmail.com</span>
-          </a>
-          <a href="tel:+959685752511" class="card" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none; color: inherit">
-            <i data-lucide="phone"></i>
-            <span>09685752511</span>
-          </a>
-        </div>
-        <a href="mailto:thonewathan.personal@gmail.com" class="contact-button">
-          Get in Touch
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>© <script>document.write(new Date().getFullYear())</script> Thone Wa Than. Crafted with AI & ❤️</p>
-  </footer>
-
-  <script>
-    lucide.createIcons();
-
-    // Intersection Observer for fade-in animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('fade-in');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('section').forEach(section => {
-      observer.observe(section);
-    });
-
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
-      });
-    });
-  </script>
-</body>
-</html>
+        <div class="skill-tag">Python</div>
+        <div class="skill-tag">TensorFlow</div>
+        <div class="skill-tag">PyTorch</div>
+        <div class="skill-tag">React</div>
+        <div class="skill-tag">Node.js</div>
+        <div class="skill-tag">TypeScript</div>
+        <div class="skill-tag">AWS</div>
+        <div class="skill-tag">Docker</div>
+        <div class="skill-tag">Kubernetes</div>
+        <div class="skill-tag">GraphQL</div>
+        <d
